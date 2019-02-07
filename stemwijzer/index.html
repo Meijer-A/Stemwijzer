@@ -196,49 +196,37 @@
         </div>
         <!-- Statement -->
         <div id="statements" data-section-name="statements" class="section active">
+            <div class="application__navigation">
+                <button class="btn btn--navigation btn--back"></button>
+            </div>
             <div class="statement js-statement" data-screen-id="29">
                 <div class="statement__wrapper">
                     <h1 class="statement__title focused" tabindex="0" id="title"></h1>
                     <p class="statement__description" id="statement"></p>
                 </div>
-                <details class="statement__opinions js-parties-opinions" open="">
+                <details class="statement__opinions js-parties-opinions">
                     <summary class="opinions__title">Wat vinden de partijen?</summary>
                     <div class="opinions__wrapper">
                         <div class="opinion opinion--agree">
                             <h3 class="opinion__subtitle">Eens</h3>
-                            <div id="opinionAgree">
-                                <!-- <details class="opinion__party">
-                                    <summary class="party__title">D66</summary>
-                                    <p class="party__description">"D66 wil meer Europese Defensiesamenwerking. Ons streven voor de lange termijn is een Europese krijgsmacht. Met een vijandig Rusland en terreurorganisatie ISIS aan onze buitengrenzen heeft de EU dat ook nodig. Een Europese krijgsmacht is ook veel goedkoper dan wanneer ieder land alles zelf doet."</p>
-                                </details> -->
-                            </div>
+                            <div id="opinionAgree"></div>
                         </div>
                         <div class="opinion opinion--neither">
                             <h3 class="opinion__subtitle">Geen van beide</h3>
-                            <div id="opinionAmbivalent">
-                                <!-- <details class="opinion__party">
-                                    <summary class="party__title">Niet Stemmers</summary>
-                                    <p class="party__description">Geen toelichting gegeven</p>
-                                </details> -->
-                            </div>
+                            <div id="opinionAmbivalent"></div>
                         </div>
                         <div class="opinion opinion--disagree">
                             <h3 class="opinion__subtitle">Oneens</h3>
-                            <div id="opinionContra">
-                                <!-- <details class="opinion__party">
-                                    <summary class="party__title">VVD</summary>
-                                    <p class="party__description">"Nederland moet zeggenschap houden over het eigen leger. Wij zijn daarom tegen een Europees leger. Wel is het goed om afspraken te maken over bijvoorbeeld gezamenlijke investeringen. "</p>
-                                </details> -->
-                            </div>
+                            <div id="opinionContra"></div>
                         </div>
                     </div>
                 </details>
                 <div class="statement__actions">
-                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="1" onclick="awnser(3)">Eens</button>
-                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="0" onclick="awnser(2)">Geen van beide</button>
-                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="-1" onclick="awnser(1)">Oneens</button>
+                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="1" onclick="awnser('agree')">Eens</button>
+                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="0" onclick="awnser('none')">Geen van beide</button>
+                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="-1" onclick="awnser('disagree')">Oneens</button>
                     <button class="btn btn--big btn--skip" data-position="-2">
-                    <span class="btn__skip--desktop" onclick="awnser()">Sla deze vraag over</span>
+                    <span class="btn__skip--desktop" onclick="awnser('skip')">Sla deze vraag over</span>
                     <span class="btn__skip--mobile">Swipe om over te slaan</span>
                     </button>
                 </div>

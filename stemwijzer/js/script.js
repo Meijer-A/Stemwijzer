@@ -23,11 +23,12 @@ function start() {
 }
 
 function awnser(value) {
-    if (value === 3) {
+    console.log(value);
+    if (value === "agree") {
 
-    } else if (value === 2) {
+    } else if (value === "none") {
 
-    } else if (value === 1) {
+    } else if (value === "disagree") {
 
     } else {
         
@@ -37,7 +38,30 @@ function awnser(value) {
 } 
 
 function getStatement(counter) {
-    console.log(counter);
+    opinionAgree.innerHTML= null;
+    opinionAmbivalent.innerHTML= null;
+    opinionContra.innerHTML= null;
+
     statementTitle.innerHTML = counter + 1 + ". " + subjects[counter].title;
     statementStatement.innerHTML = subjects[counter].statement;
+
+    subjects[counter].parties.forEach(function(x) {
+        if (x.position == "pro") {
+            var parent = opinionAgree;
+            createParty(parent, x);
+        } else if (x.position === "ambivalent") {
+            var parent = opinionAmbivalent;
+            createParty(parent, x);
+        } else if (x.position === "contra") {
+            var parent = opinionContra;
+            createParty(parent, x);
+        }
+    });
+
+    function createParty(parent, x) {
+        var div = document.createElement("div");        // Create a <button> element
+        div.innerHTML = "<details class=\"opinion__party\"><summary class=\"party__title\">" + x.name + "</summary><p class=\"party__description\">" + x.explanation + "</p></details>";
+        parent.appendChild(div);
+    }
 }
+

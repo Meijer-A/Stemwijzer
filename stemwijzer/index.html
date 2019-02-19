@@ -197,7 +197,7 @@
         <!-- Statement -->
         <div id="statements" data-section-name="statements" class="section active">
             <div class="application__navigation">
-                <button class="btn btn--navigation btn--back"></button>
+                <button class="btn btn--navigation btn--back" onclick="goBack()"></button>
             </div>
             <div class="statement js-statement" data-screen-id="29">
                 <div class="statement__wrapper">
@@ -222,52 +222,78 @@
                     </div>
                 </details>
                 <div class="statement__actions">
-                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="1" onclick="awnser('agree')">Eens</button>
-                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="0" onclick="awnser('none')">Geen van beide</button>
-                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="-1" onclick="awnser('disagree')">Oneens</button>
-                    <button class="btn btn--big btn--skip" data-position="-2">
-                    <span class="btn__skip--desktop" onclick="awnser('skip')">Sla deze vraag over</span>
+                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="1" id="agree" onclick="anwser('pro')">Eens</button>
+                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="0" id="none" onclick="anwser('none')">Geen van beide</button>
+                    <button class="btn btn--big btn--black btn--answer js-button-answer" data-position="-1" id="disagree" onclick="anwser('disagree')">Oneens</button>
+                    <button class="btn btn--big btn--skip" data-position="-2" id="skip" onclick="anwser('skip')">
+                    <span class="btn__skip--desktop">Sla deze vraag over</span>
                     <span class="btn__skip--mobile">Swipe om over te slaan</span>
                     </button>
                 </div>
             </div>
         </div>
+        <!-- extra weight -->
+        <div class="flex-wrapper" id="extraWeight">
+            <div class="flex-wrapper__content">
+                <div class="content">
+                    <div class="application">
+                        <div class="themes themes--statements">
+                            <div class="themes__wrapper">
+                                <h1 class="themes__title">Zijn er onderwerpen die u extra belangrijk vindt?</h1>
+                                <p class="themes__description">Aangevinkte stellingen tellen extra mee bij het berekenen van het resulaat.</p>
+                            </div>
+                            <div class="themes__actions">
+                                <button class="btn btn--big btn--black btn--continue">Ga verder</button>
+                            </div>
+                            <div class="themes__opinions">
+                                <h2 class="opinions__title">Extra belangrijke onderwerpen</h2>
+                                <ul class="opinions__list js-selection" id="extraWeightOpinion">
+                                </ul>
+                                <div class="themes__actions themes__actions--bottom">
+                                    <button class="btn btn--delete js-delete-selection" data-target="opinions">Verwijder selectie</button>
+                                </div>
+                                <div class="themes__actions themes__actions themes__actions--primary">
+                                    <button class="btn btn--big btn--black btn--continue" onclick="getResult()">Ga verder</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+        </div>
         <!-- Result -->
         <div class="result" id="result">
             <div class="result__header">
-                <h1 class="result__title">Uw mening komt het best overeen met: <span class="title__subtitle js-podium-winner">PvdA</span></h1>
+                <h1 class="result__title">Uw mening komt het best overeen met: <span class="title__subtitle js-podium-winner" id="bestMatch"></span></h1>
                 <div class="result__podium js-podium">
-                    <div class="podium__item js-podium-item" data-party-id="1079" data-party-name="PvdA" style="display: inline-block;">
+                    <div class="podium__item js-podium-item"  style="display: inline-block;">
                         <svg class="podium__figure" version="1.1" viewBox="0 0 160 160">
                             <circle r="79" cy="81" cx="81" stroke-width="1" stroke="#D5D5D5" fill="#E7EAEB"></circle>
                             <circle r="62" cy="81" cx="81" stroke="" fill="#fff"></circle>
-                            <circle class="figure__doughnut js-podium-item-doughnut" data-percentage="53" r="70" cy="81" cx="81" stroke-width="16" stroke="#01B4DC" fill="none"></circle>
+                            <circle class="figure__doughnut js-podium-item-doughnut" data-percentage="" r="70" cy="81" cx="81" stroke-width="16" stroke="#01B4DC" fill="none"></circle>
                         </svg>
-                        <a href="https://www.pvda.nl/verkiezingen/verkiezingsprogramma/"><img class="podium__party" src="logos/pvda.svg" title="PvdA" alt="PvdA"></a>
-                        <span class="figure__caption"><strong><span class=" js-podium-item-percentage">53</span>%</strong>overeenkomst</span>
+                        <img class="podium__party" id="resultOneImg">
+                        <span class="figure__caption"><strong><span class=" js-podium-item-percentage" id="resultOne"></span>%</strong>overeenkomst</span>
                     </div>
-                    <div class="podium__item js-podium-item" data-party-id="1078" data-party-name="VVD" style="display: inline-block;">
+                    <div class="podium__item js-podium-item"  style="display: inline-block;">
                         <svg class="podium__figure" version="1.1" viewBox="0 0 160 160">
                             <circle r="79" cy="81" cx="81" stroke-width="1" stroke="#D5D5D5" fill="#E7EAEB"></circle>
                             <circle r="62" cy="81" cx="81" stroke="" fill="#fff"></circle>
-                            <circle class="figure__doughnut js-podium-item-doughnut" data-percentage="50" r="70" cy="81" cx="81" stroke-width="16" stroke="#01B4DC" fill="none"></circle>
+                            <circle class="figure__doughnut js-podium-item-doughnut" data-percentage="" r="70" cy="81" cx="81" stroke-width="16" stroke="#01B4DC" fill="none"></circle>
                         </svg>
-                        <a href="http://vvd.nl"><img class="podium__party" src="logos/vvd.svg" title="VVD" alt="VVD"></a>
-                        <span class="figure__caption"><strong><span class=" js-podium-item-percentage">50</span>%</strong>overeenkomst</span>
+                        <img class="podium__party" id="resultTwoImg">
+                        <span class="figure__caption"><strong><span class=" js-podium-item-percentage" id="resultTwo"></span>%</strong>overeenkomst</span>
                     </div>
-                    <div class="podium__item js-podium-item" data-party-id="1082" data-party-name="SGP" style="display: inline-block;">
+                    <div class="podium__item js-podium-item"  style="display: inline-block;">
                         <svg class="podium__figure" version="1.1" viewBox="0 0 160 160">
                             <circle r="79" cy="81" cx="81" stroke-width="1" stroke="#D5D5D5" fill="#E7EAEB"></circle>
                             <circle r="62" cy="81" cx="81" stroke="" fill="#fff"></circle>
-                            <circle class="figure__doughnut js-podium-item-doughnut" data-percentage="50" r="70" cy="81" cx="81" stroke-width="16" stroke="#01B4DC" fill="none"></circle>
+                            <circle class="figure__doughnut js-podium-item-doughnut"  data-percentage="" r="70" cy="81" cx="81" stroke-width="16" stroke="#01B4DC" fill="none"></circle>
                         </svg>
-                        <a href="https://www.sgp.nl/"><img class="podium__party" src="logos/sgp.svg" title="SGP" alt="SGP"></a>
-                        <span class="figure__caption"><strong><span class=" js-podium-item-percentage">50</span>%</strong>overeenkomst</span>
-                    </div>
-                    <div class="podium__item js-podium-item" data-party-id="1100" data-party-name="Lokaal in de Kamer" style="display: none;">
+                        <img class="podium__party" id="resultThreeImg">
+                        <span class="figure__caption"><strong><span class=" js-podium-item-percentage" id="resultThree"></span>%</strong>overeenkomst</span>
                     </div>
                 </div>
-                <button class="btn btn--black btn--two-rows btn--compare-top">Vergelijk uw mening <span class="btn__subtitle">met deze partijen</span></button>
             </div>
         </div>
         <div class="footer">

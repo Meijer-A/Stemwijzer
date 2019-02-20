@@ -14,3 +14,7 @@
 .application__navigation {
     padding: 14px
 }
+
+.filterbuttons {
+    margin-bottom: 5px !important;
+}

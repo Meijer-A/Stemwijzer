@@ -15,6 +15,8 @@ const opinionContra = document.getElementById("opinionContra");
 
 const extraWeight = document.getElementById("extraWeight");
 const extraWeightOpinion = document.getElementById("extraWeightOpinion");
+const filterBigParties = document.getElementById("filterBigParties");
+const filterSecular = document.getElementById("filterSecular");
 
 const result = document.getElementById("result"); 
 
@@ -24,13 +26,13 @@ const resultOne = document.getElementById("resultOne");
 const resultTwo = document.getElementById("resultTwo"); 
 const resultThree = document.getElementById("resultThree"); 
 
-const resultOnePercentage = document.getElementById("resultOnePercentage"); 
-const resultTwoPercentage = document.getElementById("resultTwoPercentage"); 
-const resultThreePercentage = document.getElementById("resultThreePercentage"); 
-
 const resultOneImg = document.getElementById("resultOneImg"); 
 const resultTwoImg = document.getElementById("resultTwoImg"); 
 const resultThreeImg = document.getElementById("resultThreeImg"); 
+
+const resultOnePercentage = document.getElementById("resultOnePercentage"); 
+const resultTwoPercentage = document.getElementById("resultTwoPercentage"); 
+const resultThreePercentage = document.getElementById("resultThreePercentage"); 
 
 var counter = 0;
 var answers = [];
@@ -141,44 +143,60 @@ function getHeavierstatements() {
 
 function setHeavystatement(value) {
     if (value.checked) {
-        value
-        console.log("wow dit is true");
+        subjects[value.id.split("_").pop()].heavy = true;
     } else {
-        console.log("nein");
+        delete subjects[value.id.split("_").pop()].heavy;
     }
 }
 
 function getResult() {
-    statements.style.display = "none";
+    extraWeight.style.display = "none";
     result.style.display = "block";
 
     for(var i = 0; i < parties.length - 1; i++){
         parties[i].count = 0;
-        
-       for (let x = 0; x < answers.length - 1; x++) {
-           if (answers[x] === subjects[x].parties[i].position) 
-           parties[i].count++;
-       }
-       parties[i].percentage = Math.round(100 / answers.length * parties[i].count);
+        let totalPoints = 0;
+        for (let x = 0; x < answers.length - 1; x++) {
+            if (answers[x] === subjects[x].parties[i].position) {
+                if ("heavy" in subjects[i]) {
+                    parties[i].count++;
+                    totalPoints++;
+                } 
+                parties[i].count++;
+                totalPoints++;
+            } else {
+                totalPoints++;
+            }
+        }
+       parties[i].percentage = Math.round(100 / totalPoints * parties[i].count);
     }
 
     parties.sort(function(a, b) {
         return b.percentage - a.percentage;
     });
 
-    // resultOnePercentage.setAttribute("data-percentage", parties[0].percentage);
-    // resultTwoPercentage.setAttribute("data-percentage", parties[1].percentage);
-    // resultThreePercentage.setAttribute("data-percentage", parties[2].percentage);
-    
-    // resultOnePercentage.dataset.percentage = parties[0].percentage;
-    // resultTwoPercentage.dataset.percentage = parties[1].percentage;
-    // resultThreePercentage.dataset.percentage = parties[2].percentage;
+    if (filterBigParties.checked) {
+        console.log(parties);
+        parties = parties.filter(function(parties) {
+            return parties.size > 0;
+        });
+        console.log(parties);
+    }
+    if (filterSecular.checked) {
+        console.log(parties);
+        parties = parties.filter(function(parties) {
+            return parties.secular == true;
+        });
+        console.log(parties);
+    }
 
     resultOneImg.src = "parties/" + parties[0].name + ".png";
     resultTwoImg.src = "parties/" + parties[1].name + ".png";
     resultThreeImg.src = "parties/" + parties[2].name + ".png";
 
-
+    resultOne.innerHTML = parties[0].percentage;
+    resultTwo.innerHTML = parties[1].percentage;
+    resultThree.innerHTML = parties[2].percentage;
 }
 
 function removeClass() {

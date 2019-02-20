@@ -242,16 +242,20 @@
                                 <h1 class="themes__title">Zijn er onderwerpen die u extra belangrijk vindt?</h1>
                                 <p class="themes__description">Aangevinkte stellingen tellen extra mee bij het berekenen van het resulaat.</p>
                             </div>
+                            <div class="themes__wrapper">
+                                <p class="themes__description filterbuttons">filter op grote partijen</p>
+                                <input type="checkbox" id="filterBigParties">
+                                <p class="themes__description filterbuttons">filter op seculieren patijen</p>
+                                <input type="checkbox" id="filterSecular">
+                            </div>
                             <div class="themes__actions">
-                                <button class="btn btn--big btn--black btn--continue">Ga verder</button>
+                                <button class="btn btn--big btn--black btn--continue" onclick="getResult()">Ga verder</button>
                             </div>
                             <div class="themes__opinions">
                                 <h2 class="opinions__title">Extra belangrijke onderwerpen</h2>
                                 <ul class="opinions__list js-selection" id="extraWeightOpinion">
                                 </ul>
-                                <div class="themes__actions themes__actions--bottom">
-                                    <button class="btn btn--delete js-delete-selection" data-target="opinions">Verwijder selectie</button>
-                                </div>
+                                <div class="themes__actions themes__actions--bottom"></div>
                                 <div class="themes__actions themes__actions themes__actions--primary">
                                     <button class="btn btn--big btn--black btn--continue" onclick="getResult()">Ga verder</button>
                                 </div>
